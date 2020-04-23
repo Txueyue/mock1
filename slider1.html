@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>Weekly Bar</title>
+
+<!-- Load d3.js -->
+<script src="https://d3js.org/d3.v4.js"></script>
+<head></head>
+<body>
+    <style>
+    .axis line{
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+}
+.mean {
+    stroke-width: 1px;
+    stroke: red;
+}
+</style>
+    <div id="linechart"></div>
+<script>
+var margin = {left: 50, right: 20, top: 20, bottom: 50 };
+var slots = ["week 1", "week 2", "week 3", " week 4", "week 5", "week 6", "week 7", "week 8", "week 9", "week 10", "week 11", "week 12", "week 13"];
+var width = 960 - margin.left - margin.right;
+var height = 500 - margin.top - margin.bottom;
+var svg = d3.select("#linechart")
+      .append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+      .append("g")
+        .attr("transform",
+              "translate(" + margin.left + "," + margin.top + ")");
+var x = d3.scaleBand()
+      .range([ 0, width ])
+      //.padding(0.2);
+    var xAxis = svg.append("g")
+      .attr("transform", "translate(0," + height + ")")
+
+    // Initialize the Y axis
+    var y = d3.scaleLinear()
+      .range([ height, 0]);
+    var yAxis = svg.append("g")
+      .attr("class", "myYaxis")
+
+d3.csv("test.csv", ready);
+
+function ready(error, data) {
+    if (error) throw error;
+    data.forEach(function(d) {
+        return{
+        value: [+d.Score_1, +d.Score_2, +d.Score_3, +d.Score_4, +d.Score_5, +d.Score_6, +d.Score_7, +d.Score_8, +d.Score_9, +d.Score_10, +d.Score_11, +d.Score_12, +d.Score_13]
+    }});
+    x.domain(slots);
+        xAxis.transition().duration(1000).call(d3.axisBottom(x));
+    
+        // Add Y axis
+     y.domain([0, 100]);
+        yAxis.transition().duration(1000).call(d3.axisLeft(y));
+    //function makearray(){
+      var mean =[];
+      var totalSum = [d3.sum(data.map(function(d){ return d.Score_1})),
+       d3.sum(data.map(function(d){ return d.Score_2})),
+       d3.sum(data.map(function(d){ return d.Score_3})),
+       d3.sum(data.map(function(d){ return d.Score_4}))];
+      var scoreAvg_1 = d3.mean(data, function(d) { return d.Score_1; });
+      var scoreAvg_2 = d3.mean(data, function(d) { return d.Score_2; });
+      var scoreAvg_3 = d3.mean(data, function(d) { return d.Score_3; });
+      var scoreAvg_4 = d3.mean(data, function(d) { return d.Score_4; });
+	
+    mean = [[1,scoreAvg_1], [1,scoreAvg_2], [1,scoreAvg_3], [1,scoreAvg_4]];
+    
+    svg.selectAll("line")
+      .data(data)
+
+    var line = d3.line();
+    var pathData = line(mean);
+       // .x(function(d) { return x(d.slots);  })
+      //  .y(function(d) { return y(d.mean);  });
+    
+    svg.append("path")
+        .datum(data)
+        .attr("class", "mean")
+        //.attr("d", line)
+
+
+    console.log(mean)   ;}
+    //console.log("data", data);}
+</script>  
+    
+</body>
+</html>

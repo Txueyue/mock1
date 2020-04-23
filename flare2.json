@@ -1,0 +1,53 @@
+{
+ "name": "WEEK1",
+ "children": [
+  {
+      "name": "Week 1 results",
+      "children":[
+          {
+             "name": "PASS",
+             "children": [
+    {
+     "name": "Top 5",
+     "children": [
+      {"name": "10041", "size": 98},
+      {"name": "10042", "size": 89},
+      {"name": "10043", "size": 85},
+      {"name": "10044", "size": 94},
+      {"name": "10045", "size": 90}
+     ]
+    },
+      {"name": "10046", "size": 80},
+      {"name": "10047", "size": 83},
+      {"name": "10048", "size": 77},
+      {"name": "10049", "size": 68},
+      {"name": "10050", "size": 68}
+     ]
+    },
+    {
+        "name": "FAIL",
+        "children": [
+         {
+          "name": "Bottom 5",
+          "children": [
+           {"name": "10051", "size": 21},
+           {"name": "10052", "size": 33},
+           {"name": "10053", "size": 12},
+           {"name": "10054", "size": 14},
+           {"name": "10055", "size": 20}
+          ]
+         },
+           {"name": "10056", "size": 45},
+           {"name": "10057", "size": 35},
+           {"name": "10058", "size": 37},
+           {"name": "10059", "size": 46},
+           {"name": "10060", "size": 38},
+           {"name": "10061", "size": 37},
+           {"name": "10062", "size": 46},
+           {"name": "10063", "size": 38}
+          ]
+         }
+        ]
+    }
+]
+}
